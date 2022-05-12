@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/god-jay/gools/examples/gen-proto/pb";
+
+service UserService {
+  rpc GetIndex (IndexRequest) returns (IndexResponse) {
+    option (google.api.http) = {
+      post: "/user/index",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "user index api"
+    };
+  }
+}
+
+
+message IndexRequest {
+  uint32 id = 1;
+}
+message IndexResponse {
+  string name = 1;
+  string email = 2;
+  string phone = 3;
+}
