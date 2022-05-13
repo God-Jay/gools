@@ -89,25 +89,25 @@ func (c *Consumer) saramaConsumerGroup(conf *Config, group string) (sarama.Consu
 	return client, err
 }
 
+// Setup is run at the beginning of a new session, before ConsumeClaim
 func (c *Consumer) Setup(session sarama.ConsumerGroupSession) error {
 	// Mark the consumer as ready
 	close(c.Ready)
 	return nil
 }
 
+// Cleanup is run at the end of a session, once all ConsumeClaim goroutines have exited
 func (c *Consumer) Cleanup(session sarama.ConsumerGroupSession) error {
 	return nil
 }
 
+// ConsumeClaim must start a consumer loop of ConsumerGroupClaim's Messages().
 func (c *Consumer) ConsumeClaim(session sarama.ConsumerGroupSession, claim sarama.ConsumerGroupClaim) error {
 	for msg := range claim.Messages() {
-		log.Printf("Message claimed: value = %s, timestamp = %v, topic = %s, offset = %d, partition = %d", string(msg.Value), msg.Timestamp, msg.Topic, msg.Offset, msg.Partition)
-
-		err := c.Processor.Handle(session.Context(), msg)
+		err := c.Processor.Handle(session, msg)
 		if err != nil {
 			return err
 		}
-		session.MarkMessage(msg, "")
 	}
 	return nil
 }

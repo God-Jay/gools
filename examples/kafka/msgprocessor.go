@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"github.com/Shopify/sarama"
 	"github.com/god-jay/gools/pkg/kafka"
 	"log"
@@ -16,8 +15,14 @@ func NewMsgProcessor() *MsgProcessor {
 	return &MsgProcessor{}
 }
 
-func (mp *MsgProcessor) Handle(ctx context.Context, saramaMsg *sarama.ConsumerMessage) error {
+func (mp *MsgProcessor) Handle(session sarama.ConsumerGroupSession, saramaMsg *sarama.ConsumerMessage) error {
 	// do something
-	log.Println(string(saramaMsg.Value))
+	log.Printf("Message claimed: value = %s, timestamp = %v, topic = %s, offset = %d, partition = %d", string(saramaMsg.Value), saramaMsg.Timestamp, saramaMsg.Topic, saramaMsg.Offset, saramaMsg.Partition)
+	ctx := session.Context()
+	log.Println(ctx, string(saramaMsg.Value))
+
+	// mark if some condition
+	session.MarkMessage(saramaMsg, "")
+
 	return nil
 }
