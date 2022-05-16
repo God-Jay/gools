@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 )
 
@@ -69,6 +70,36 @@ func InstallProtocGen(depsPath string) error {
 	}
 
 	return err
+}
+
+func InstallPlugin(depsPath, goInstallPath string) error {
+	pluginName := GetPluginFullName(goInstallPath)
+	_, err := os.Stat(depsPath + "/" + pluginName)
+	if err == nil {
+		return nil
+	}
+
+	log.Println("Installing plugin " + pluginName + " ......")
+	command := exec.Command(
+		"go", "install",
+		goInstallPath,
+	)
+	command.Stdin = os.Stdin
+	command.Stdout = os.Stdout
+	command.Stderr = os.Stderr
+	err = command.Run()
+
+	return err
+}
+
+func GetPluginFullName(goInstallPath string) string {
+	reg, _ := regexp.Compile("protoc-gen-([^/]*)")
+	return reg.FindString(goInstallPath)
+}
+
+func GetPluginName(goInstallPath string) string {
+	pluginFullName := GetPluginFullName(goInstallPath)
+	return strings.Replace(pluginFullName, "protoc-gen-", "", 1)
 }
 
 func FindProtoFiles(pbDir string) ([]string, error) {

@@ -12,15 +12,19 @@ func Build(protoDir string, swaggerDir string, proto3rdparty string) error {
 	depsPath := util.SetPath()
 
 	err := util.InstallProtoc(depsPath)
+	if err != nil {
+		return err
+	}
 
 	err = util.InstallProtocGen(depsPath)
+	if err != nil {
+		return err
+	}
 
-	genSwagger(protoDir, swaggerDir, proto3rdparty)
-
-	return err
+	return genSwagger(protoDir, swaggerDir, proto3rdparty)
 }
 
-func genSwagger(protoDir string, swaggerDir string, proto3rdparty string) {
+func genSwagger(protoDir string, swaggerDir string, proto3rdparty string) error {
 	log.Println("Generating swagger ......")
 
 	protoFiles, _ := util.FindProtoFiles(protoDir)
@@ -39,9 +43,11 @@ func genSwagger(protoDir string, swaggerDir string, proto3rdparty string) {
 		err := cmd.Run()
 
 		if err != nil {
-			log.Fatal(err)
+			return err
 		}
 	}
 
 	log.Println("Generating swagger finished.")
+
+	return nil
 }

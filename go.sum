@@ -189,6 +189,8 @@ github.com/go-kratos/examples v0.0.0-20220421100059-846ff5a2552b h1:/t62cX+2WkJH
 github.com/go-kratos/examples v0.0.0-20220421100059-846ff5a2552b/go.mod h1:SBgcHvVjpoH/Q+1CdH+wsxt72Ha9675vRfnkTKHLXTs=
 github.com/go-kratos/gin v0.1.0/go.mod h1:KzE88+mV1QJdmiT+sU2D560ucOXnWZx+4m0OnVcSyzQ=
 github.com/go-kratos/grpc-gateway/v2 v2.0.0-20210804092615-bdc92eb5ce83/go.mod h1:qV5/s5A7wfY7GkNzptcUFRGAG4Y8H4mlXpSrOkDEIk0=
+github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2 v2.0.0-20220512100712-ddc82ce45ee1 h1:YtB85dMKczMED00sCvHKQ7ooEJKl6N24AaMyBaWfNrk=
+github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2 v2.0.0-20220512100712-ddc82ce45ee1/go.mod h1:GCgZ6H9roibmcL68YPgbTgpTf2mPWjcWld7YSMIDdIs=
 github.com/go-kratos/kratos/contrib/config/apollo/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:PWiCyKqHgmFFtNubdOPzc4nAQSrsGwilmtsqxWvwALA=
 github.com/go-kratos/kratos/contrib/metrics/prometheus/v2 v2.0.0-20220309025117-4387085047b9/go.mod h1:PwsSRS6KrgfeJ0Xdm1Q23ZneOqLGAR8mlRD1oJ0htME=
 github.com/go-kratos/kratos/contrib/metrics/prometheus/v2 v2.0.0-20220414054820-d0b704b8f38d h1:lp6ZsvCl8vKduljYPyh/XMS3T8mzAXoHZDU8QtvbmGs=

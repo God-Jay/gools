@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/Shopify/sarama v1.19.0
 	github.com/go-kratos/examples v0.0.0-20220421100059-846ff5a2552b
+	github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2 v2.0.0-20220512100712-ddc82ce45ee1
 	github.com/go-kratos/kratos/contrib/metrics/prometheus/v2 v2.0.0-20220414054820-d0b704b8f38d
 	github.com/go-kratos/kratos/v2 v2.2.1
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.5.0
