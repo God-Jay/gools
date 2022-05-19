@@ -1,11 +1,11 @@
 package main
 
 import (
-	trdparty "github.com/god-jay/gools/pkg/grpc/3rdparty"
-	"github.com/god-jay/gools/pkg/grpc/swagger"
+	"github.com/god-jay/gools/grpc/3rdparty"
+	"github.com/god-jay/gools/grpc/swagger"
 )
 
-// cd gools/examples/gen-swagger
+// cd gools/_examples/gen-swagger
 // go run main.go
 func main() {
 	proto3rdparty := "../../3rdparty"

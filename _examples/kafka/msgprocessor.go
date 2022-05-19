@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Shopify/sarama"
-	"github.com/god-jay/gools/pkg/kafka"
+	"github.com/god-jay/gools/kafka"
 	"log"
 )
 

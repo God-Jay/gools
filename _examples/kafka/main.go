@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"github.com/god-jay/gools/pkg/kafka"
+	"github.com/god-jay/gools/kafka"
 	"os"
 	"os/signal"
 	"syscall"

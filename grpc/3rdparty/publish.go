@@ -2,7 +2,7 @@ package trdparty
 
 import (
 	"embed"
-	"github.com/god-jay/gools/pkg/publisher"
+	"github.com/god-jay/gools/publisher"
 )
 
 //go:embed google

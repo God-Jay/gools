@@ -2,13 +2,13 @@ package main
 
 import (
 	"embed"
-	"github.com/god-jay/gools/pkg/publisher"
+	"github.com/god-jay/gools/publisher"
 )
 
 //go:embed src
 var src embed.FS
 
-// cd gools/examples/publisher
+// cd gools/_examples/publisher
 // go run main.go
 func main() {
 	// publisher will create dst/src/...

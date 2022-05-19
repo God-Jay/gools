@@ -2,7 +2,7 @@ package protoc
 
 import (
 	"fmt"
-	"github.com/god-jay/gools/pkg/grpc/util"
+	"github.com/god-jay/gools/grpc/util"
 	"log"
 	"os"
 	"os/exec"
