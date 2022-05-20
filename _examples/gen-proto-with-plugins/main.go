@@ -15,7 +15,7 @@ func main() {
 	buildPbDir := "./pb"
 
 	err := protoc.Build(protoDir, buildPbDir, proto3rdparty,
-		"github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2",
+		protoc.NewPlugin("github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2", ""),
 	)
 	if err != nil {
 		panic(err)

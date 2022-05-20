@@ -9,7 +9,7 @@ import (
 	"path"
 )
 
-func Build(protoDir string, pbDir string, proto3rdparty string, plugins ...string) error {
+func Build(protoDir string, pbDir string, proto3rdparty string, plugins ...*Plugin) error {
 	depsPath := util.SetPath()
 
 	err := util.InstallProtoc(depsPath)
@@ -23,22 +23,16 @@ func Build(protoDir string, pbDir string, proto3rdparty string, plugins ...strin
 	}
 
 	for _, plugin := range plugins {
-		err = util.InstallPlugin(depsPath, plugin)
+		err = util.InstallPlugin(depsPath, plugin.InstallPath, plugin.FullName)
 		if err != nil {
 			return err
 		}
 	}
 
-	var pluginNames []string
-	for _, plugin := range plugins {
-		pluginName := util.GetPluginName(plugin)
-		pluginNames = append(pluginNames, pluginName)
-	}
-
-	return genProtoc(protoDir, pbDir, proto3rdparty, pluginNames...)
+	return genProtoc(protoDir, pbDir, proto3rdparty, plugins...)
 }
 
-func genProtoc(protoDir string, pbDir string, proto3rdparty string, pluginNames ...string) error {
+func genProtoc(protoDir string, pbDir string, proto3rdparty string, plugins ...*Plugin) error {
 	log.Println("Generating protoc files ......")
 
 	protoFiles, _ := util.FindProtoFiles(protoDir)
@@ -49,9 +43,16 @@ func genProtoc(protoDir string, pbDir string, proto3rdparty string, pluginNames 
 			"-I", path.Dir(protoFile), "-I", proto3rdparty,
 			fmt.Sprintf("--go_out=paths=source_relative:%s", pbDir),
 		}
-		for _, pluginName := range pluginNames {
-			protocArgs = append(protocArgs, fmt.Sprintf("--%s_out=paths=source_relative:%s", pluginName, pbDir))
+		for _, plugin := range plugins {
+			var arg string
+			if plugin.Arg == "" {
+				arg = fmt.Sprintf("--%s_out=paths=source_relative:%s", plugin.ArgName, pbDir)
+			} else {
+				arg = fmt.Sprintf("--%s_out=%s", plugin.ArgName, plugin.Arg)
+			}
+			protocArgs = append(protocArgs, arg)
 		}
+
 		protocArgs = append(protocArgs, protoFile)
 
 		cmd := exec.Command(
