@@ -18,6 +18,8 @@ type Consumer struct {
 	Ready     chan bool
 }
 
+type ConfOptionFunc func(c *sarama.Config)
+
 func NewConsumer(processor Processor, topics string, group string) *Consumer {
 	return &Consumer{
 		Processor: processor,
@@ -27,8 +29,8 @@ func NewConsumer(processor Processor, topics string, group string) *Consumer {
 	}
 }
 
-func (c *Consumer) Run(ctx context.Context, conf *Config) {
-	consumerGroup, err := c.saramaConsumerGroup(conf, c.Group)
+func (c *Consumer) Run(ctx context.Context, conf *Config, option ConfOptionFunc) {
+	consumerGroup, err := c.saramaConsumerGroup(conf, c.Group, option)
 	if err != nil {
 		log.Panicf("Error creating consumer group client: %v", err)
 	}
@@ -66,7 +68,7 @@ func (c *Consumer) Run(ctx context.Context, conf *Config) {
 	}
 }
 
-func (c *Consumer) saramaConsumerGroup(conf *Config, group string) (sarama.ConsumerGroup, error) {
+func (c *Consumer) saramaConsumerGroup(conf *Config, group string, option ConfOptionFunc) (sarama.ConsumerGroup, error) {
 	if conf.Verbose {
 		sarama.Logger = log.New(os.Stdout, "[sarama] ", log.LstdFlags)
 	}
@@ -83,6 +85,8 @@ func (c *Consumer) saramaConsumerGroup(conf *Config, group string) (sarama.Consu
 	if conf.Oldest {
 		config.Consumer.Offsets.Initial = sarama.OffsetOldest
 	}
+
+	option(config)
 
 	client, err := sarama.NewConsumerGroup(conf.Brokers, group, config)
 
