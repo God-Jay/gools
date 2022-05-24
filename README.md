@@ -17,6 +17,10 @@ The gools project provides several tools for you to build your application:
     - [swagger](grpc/swagger) - swagger can be used to generate the swagger files.
 - [kafka](kafka) - a kafka consumer group package, you only need to focus on your own consume logic.
 
+## installation
+
+`go get -u github.com/god-jay/gools`
+
 ## examples
 
 - [publisher](_examples/publisher)
