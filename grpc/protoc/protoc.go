@@ -9,6 +9,8 @@ import (
 	"path"
 )
 
+// Build will install protoc and plugins in the `deps` directory, and then build to generate the pb.go files
+// of the proto files in the protoDir directory.
 func Build(protoDir string, pbDir string, proto3rdparty string, plugins ...*Plugin) error {
 	depsPath := util.SetPath()
 

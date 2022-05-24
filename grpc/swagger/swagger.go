@@ -8,6 +8,8 @@ import (
 	"path"
 )
 
+// Build will install protoc and plugins in the `deps` directory, and then build to generate the swagger.json files
+// of the proto files in the protoDir directory.
 func Build(protoDir string, swaggerDir string, proto3rdparty string) error {
 	depsPath := util.SetPath()
 

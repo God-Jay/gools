@@ -14,6 +14,7 @@ var protocGenOpenapiv2 embed.FS
 //go:embed validate
 var validate embed.FS
 
+// Publish uses publisher.CopyTo to copy the 3rdparty proto files to your specified dst directory.
 func Publish(dstDir string) error {
 	err := publisher.CopyTo(dstDir, google)
 	if err != nil {

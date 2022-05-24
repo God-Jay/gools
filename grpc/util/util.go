@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// SetPath sets the execution path to the `deps` directory in the running directory.
 func SetPath() string {
 	pwd, _ := os.Getwd()
 	depsPath := pwd + "/deps"
