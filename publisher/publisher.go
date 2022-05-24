@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// CopyTo publish your `//go:embed` file or directory to the specified dst directory
 func CopyTo(dstDir string, fs embed.FS) error {
 	fsDirPath := "."
 	return copyTo(dstDir, fs, fsDirPath)

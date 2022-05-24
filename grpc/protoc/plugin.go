@@ -13,8 +13,8 @@ type Plugin struct {
 	ArgName  string
 }
 
-// NewPlugin
-// set arg to "" to use default option
+// NewPlugin requires the installation path of the plugin and the build argument.
+// Set arg to "" to use default build option.
 func NewPlugin(installPath string, arg string) *Plugin {
 	return &Plugin{
 		InstallPath: installPath,
