@@ -6,6 +6,13 @@ Gools (go tools) 是一组开发工具包，让您更便利地进行应用开发
 
 ## gools
 
+### cmd
+
+- [cmd](cmd) - cmd 包含了几个有用的命令工具
+    - [protoc-gen-gin-http](cmd/protoc-gen-gin-http) - 一个从 proto 文件生成 gin 框架使用的 http handler 的 protoc 插件
+
+### 包
+
 gools 提供了几个开发工具，帮助您快速构建应用：
 
 - [publisher](publisher) - 使用 `//go:embed` 生成文件的发布工具
@@ -21,6 +28,8 @@ gools 提供了几个开发工具，帮助您快速构建应用：
 
 ## 示例
 
+- cmd
+    - [protoc-gen-gin-http](_examples/gin-protoc-project)
 - [publisher](_examples/publisher)
 - grpc
     - [protoc](_examples/gen-proto)
