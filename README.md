@@ -8,7 +8,7 @@ Gools (go tools) is a set of go tools for building your applications more conven
 
 The gools project provides several tools for you to build your application:
 
-- [publisher](publisher) - a tool using `//go:embed` to publish your files to the project.
+- [publisher](publisher) - a tool using `//go:embed` to publish package files to your project.
 - [grpc](grpc) - grpc provides several grpc related tools.
     - [3rdparty](grpc/3rdparty) - 3rdparty provides a `Publish` api to publish the third_party proto files to your
       project.
