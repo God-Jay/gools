@@ -11,6 +11,9 @@ import (
 
 // Build will install protoc and plugins in the `deps` directory, and then build to generate the pb.go files
 // of the proto files in the protoDir directory.
+//
+// If the plugins parameter is set, this will only install plugins,
+// otherwise this will only install protoc.
 func Build(protoDir string, pbDir string, proto3rdparty string, plugins ...*Plugin) error {
 	depsPath := util.SetPath()
 
@@ -43,16 +46,20 @@ func genProtoc(protoDir string, pbDir string, proto3rdparty string, plugins ...*
 
 		protocArgs := []string{
 			"-I", path.Dir(protoFile), "-I", proto3rdparty,
-			fmt.Sprintf("--go_out=paths=source_relative:%s", pbDir),
 		}
-		for _, plugin := range plugins {
-			var arg string
-			if plugin.Arg == "" {
-				arg = fmt.Sprintf("--%s_out=paths=source_relative:%s", plugin.ArgName, pbDir)
-			} else {
-				arg = fmt.Sprintf("--%s_out=%s", plugin.ArgName, plugin.Arg)
+
+		if len(plugins) == 0 {
+			protocArgs = append(protocArgs, fmt.Sprintf("--go_out=paths=source_relative:%s", pbDir))
+		} else {
+			for _, plugin := range plugins {
+				var arg string
+				if plugin.Arg == "" {
+					arg = fmt.Sprintf("--%s_out=paths=source_relative:%s", plugin.ArgName, pbDir)
+				} else {
+					arg = fmt.Sprintf("--%s_out=%s", plugin.ArgName, plugin.Arg)
+				}
+				protocArgs = append(protocArgs, arg)
 			}
-			protocArgs = append(protocArgs, arg)
 		}
 
 		protocArgs = append(protocArgs, protoFile)
