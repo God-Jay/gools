@@ -27,4 +27,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	// build by version
+	err = protoc.Build(protoDir, buildPbDir, proto3rdparty,
+		protoc.NewPlugin("github.com/go-kratos/kratos/cmd/protoc-gen-go-http/v2@latest", ""),
+	)
+	if err != nil {
+		panic(err)
+	}
 }

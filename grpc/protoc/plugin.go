@@ -27,7 +27,10 @@ func NewPlugin(installPath string, arg string) *Plugin {
 
 func getPluginFullName(goInstallPath string) string {
 	reg, _ := regexp.Compile("protoc-gen-([^/]*)")
-	return reg.FindString(goInstallPath)
+	pluginFullName := reg.FindString(goInstallPath)
+
+	// your-plugin@latest etc.
+	return strings.Split(pluginFullName, "@")[0]
 }
 
 func getPluginName(goInstallPath string) string {
