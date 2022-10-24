@@ -1,0 +1,12 @@
+Service:
+  Name: client.api
+  ListenOn: 0.0.0.0:8080
+
+Etcd:
+  Endpoints:
+    - localhost:2379
+    - localhost:22379
+
+RpcServices:
+  DBService: db-service.rpc
+  RedisService: redis-service.rpc

@@ -1,0 +1,8 @@
+Service:
+  Name: redis-service.rpc
+  ListenOn: 0.0.0.0:50052
+
+Etcd:
+  Endpoints:
+    - localhost:2379
+    - localhost:22379
