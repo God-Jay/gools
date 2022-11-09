@@ -1,0 +1,5 @@
+Host: god-jay-micro-mysql
+Port: 3306
+Database: god-jay-test-db
+Username: root
+Password: god-jay-pw

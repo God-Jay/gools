@@ -1,0 +1,7 @@
+### Send POST request with json body
+POST localhost:8080/user
+Content-Type: application/json
+
+{
+  "id": 1
+}

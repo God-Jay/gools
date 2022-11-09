@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "github.com/god-jay/gools/_examples/discovery/my-micro-service/pb";
+
+service DBUserService {
+  //登录接口
+  rpc GetUserById (DBUserRequest) returns (DBUserResponse) {
+    option (google.api.http) = {
+      post: "/user",
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "查询用户信息"
+    };
+  }
+}
+
+
+message DBUserRequest {
+  int32 id = 1;
+}
+message DBUserResponse {
+  string name = 1;
+  int32 age = 2;
+  string sex = 3;
+}

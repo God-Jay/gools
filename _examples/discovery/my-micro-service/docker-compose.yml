@@ -1,0 +1,52 @@
+version: "3.0"
+
+services:
+  etcd:
+    container_name: god-jay-micro-etcd
+    image: bitnami/etcd:3.5
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    networks:
+      - god-jay-micro-net
+
+  mysql:
+    container_name: god-jay-micro-mysql
+    image: god-jay-mysql
+    networks:
+      - god-jay-micro-net
+
+  db-service1:
+    container_name: god-jay-micro-db-service1
+    image: god-jay-server
+    networks:
+      - god-jay-micro-net
+    depends_on:
+      - etcd
+      - mysql
+    command: ["./wait-for", "god-jay-micro-mysql:3306", "--", "./db-service"]
+
+  db-service2:
+    container_name: god-jay-micro-db-service2
+    image: god-jay-server
+    networks:
+      - god-jay-micro-net
+    depends_on:
+      - etcd
+      - mysql
+    command: ["./wait-for", "god-jay-micro-mysql:3306", "--", "./db-service"]
+
+  api-service:
+    container_name: god-jay-micro-api-service
+    image: god-jay-client
+    networks:
+      - god-jay-micro-net
+    depends_on:
+      - etcd
+      - mysql
+    command: ["./api-service"]
+    ports:
+      - 8080:8080
+
+networks:
+  god-jay-micro-net:
+    driver: bridge

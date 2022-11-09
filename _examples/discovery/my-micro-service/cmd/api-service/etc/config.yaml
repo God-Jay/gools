@@ -1,0 +1,12 @@
+Service:
+  Name: user-service.api
+  ListenOn: 0.0.0.0:8080
+
+Etcd:
+  Endpoints:
+    - localhost:2379
+    - etcd-etcd-1:2379
+    - god-jay-micro-etcd:2379
+
+RpcServices:
+  DBService: db-service.rpc

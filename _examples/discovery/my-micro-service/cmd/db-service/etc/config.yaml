@@ -1,0 +1,9 @@
+Service:
+  Name: db-service.rpc
+  ListenOn: :50051
+
+Etcd:
+  Endpoints:
+    - localhost:2379
+    - etcd-etcd-1:2379
+    - god-jay-micro-etcd:2379
