@@ -6,6 +6,7 @@ clean-docker: stop-docker-compose rm-build-dockerfile
 
 .PHONY: all
 
+
 ### build
 build-go:
 	cd cmd/init && go run *.go
@@ -19,6 +20,12 @@ build-dockerfile:
 
 docker-compose:
 	docker compose up -d
+
+
+### test api
+run-k6:
+	docker run --network god-jay-micro-net --rm -i grafana/k6 run --vus 100 --duration 10s - <test/script.js
+
 
 ### destroy
 stop-docker-compose:

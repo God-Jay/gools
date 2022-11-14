@@ -1,4 +1,4 @@
-version: "3.0"
+version: "3.9"
 
 services:
   etcd:
@@ -49,4 +49,5 @@ services:
 
 networks:
   god-jay-micro-net:
+    name: god-jay-micro-net
     driver: bridge
