@@ -27,7 +27,7 @@ func main() {
 
 	kfk.AddConsumer(NewMsgProcessor(), "topic", "group")
 
-	kfk.RunConsumer(ctx)
+	kfk.RunConsumers(ctx)
 
 	// Wait for SIGINT and SIGTERM (HIT CTRL-C)
 	quit := make(chan os.Signal)
