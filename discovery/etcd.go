@@ -97,7 +97,7 @@ func getDiscEtcd(target resolver.Target) *discEtcd {
 func (de *discEtcd) loadServiceListenOn() {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 
-	resp, err := de.Client.Get(ctx, makeKeyPrefix(de.serviceName), clientv3.WithPrefix())
+	resp, err := de.Get(ctx, makeKeyPrefix(de.serviceName), clientv3.WithPrefix())
 	if err != nil {
 		// TODO
 	}
